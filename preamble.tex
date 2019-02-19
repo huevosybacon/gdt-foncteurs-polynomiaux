@@ -1,0 +1,224 @@
+
+
+
+
+
+% PACKAGES
+% \usepackage{MnSymbol}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{realboxes,verbatim,enumerate,subcaption,bussproofs,graphicx,float}
+\usepackage{amsmath, amssymb,amsthm,amsfonts}
+\usepackage{tikz-cd,graphics,hyperref,lipsum %
+  % ,mathrsfs
+  % ,titlesec
+  ,mathtools
+  % ,mathabx
+}
+
+\usepackage[all]{xy}
+\usepackage[bottom]{footmisc}
+\usepackage[mathcal]{euscript}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+% MISE EN PAGE
+\frenchspacing
+\setlength{\oddsidemargin}{-0pt}
+\setlength{\evensidemargin}{-0pt}
+\setlength{\textwidth}{484pt}
+%   \setlength{\oddsidemargin}{0mm}
+%   \setlength{\evensidemargin}{0mm}
+%   \setlength{\topmargin}{0mm}
+%   \setlength{\headheight}{0mm}
+%   \setlength{\textwidth}{164mm}
+%   \setlength{\headsep}{12mm}
+%   \setlength{\textheight}{220mm}
+% \linespread{1.1}
+
+
+
+
+
+% XY
+\xyoption{2cell}
+
+
+
+
+
+% SECTIONS
+% \titleformat{\subsection}[runin]{\normalfont\bfseries}{\thesubsection}{0.3em}{\\}
+% \titleformat{\subsubsection}[runin]{\normalfont\bfseries}{\thesubsubsection}{0.2em}{:
+% }
+
+
+
+
+
+% TIKZ
+% tikz libraries
+\usetikzlibrary{fit}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{positioning}
+
+% tikz arrows
+% Arrow tip styles for tikz-cd
+\tikzset{commutative diagrams/arrow style=tikz}
+% \tikzset{commutative diagrams/tri/.code={\pgfsetarrowsend{xytri}}}
+% \tikzset{commutative diagrams/two heads/.code={\pgfsetarrowsend{xyonto}}}
+\pgfarrowsdeclarealias{c}{c}{right hook}{left hook}
+\pgfarrowsdeclarealias{c'}{c'}{left hook}{right hook}
+% For using tikz-cd style in \tikzpicture 
+\tikzset{cd-style/.style={commutative diagrams/every diagram}}
+\tikzset{cd-arrow-style/.style={commutative diagrams/.cd, every arrow, every label}}
+
+% General style settings:
+\tikzset{
+  commutative diagrams/diagrams={row sep=large},
+  arrlabel/.style={font=\footnotesize},
+  arrlabelsmall/.style={font=\tiny},
+  arrmidlabel/.style={auto=false,fill=white,font=\footnotesize} % to place label *on* arrow shaft
+}
+
+
+
+
+
+% HYPERLINKS
+\hypersetup{
+  linktoc=page,
+  linkcolor=black,          % color of internal links
+  citecolor=blue,        % color of links to bibliography
+  filecolor=blue,      % color of file links
+  urlcolor=NavyBlue,
+  colorlinks=true           % color of external links
+}
+
+
+
+
+
+% THEOREMS
+\numberwithin{equation}{section}
+\newcounter{exa}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{open}[theorem]{Open problem}
+\newtheorem{observation}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{abuse}[theorem]{Abuse}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{para}[theorem]{}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newcounter{cques}
+\newtheorem{ques}[cques]{Question} 
+
+
+
+
+
+% SETTINGS
+\setlipsumdefault{23-24}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+
+
+
+
+
+% COMMANDS
+\newcommand{\of}{\mathord{:}}
+\newcommand{\bigslant}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+\newcommand{\dedukti}{Dedukti}
+\newcommand{\tcub}{\mathbf{T_\square}}
+\newcommand{\tcubd}{\mathbb{T_\square}}
+\newcommand{\Tfrac}[2]{%
+  \ooalign{%
+    $\genfrac{}{}{1.2pt}1{#1}{#2}$\cr%
+    $\color{white}\genfrac{}{}{.4pt}1{\phantom{#1}}{\phantom{#2}}$}%
+}
+\newcommand{\todo}{{\color{red}TODO:} }
+\newcommand{\todonote}[1]{{\color{red}TODO: #1}}
+\newcommand{\todoref}{{\color{red}TODOref}\ }
+\newcommand{\todocite}{{\color{red}TODOcite}\ }
+\newcommand{\ssep}{\mid}
+\newcommand{\rmf}{\mathrm{F}}
+\newcommand{\bbf}{\mathbb{F}}
+\newcommand{\rmi}{\mathrm{I}}
+\newcommand{\bbi}{\mathbb{I}}
+\newcommand{\bbt}{\mathbb{T}}
+\newcommand{\bft}{\mathbf{T}}
+\newcommand{\cset}{\mathsf{cSet}}
+\newcommand{\univ}{\mathrm{U}}
+\newcommand{\el}[1]{\mathrm{El}(#1)}
+\newcommand{\elf}[1]{\mathrm{El}_\rmf(#1)}
+\newcommand{\yon}{\mathbf{y}}
+\newcommand{\syn}{\mathsf{Syn}}
+% \newcommand{\op}{^{\hspace{.75pt}\text{op}}}
+% \newcommand{\Cat}{\mathbf{Cat}}
+% \newcommand{\slice}[1]{/_{\! #1}}
+\newcommand{\coend}[1]{\int^{#1}\!\! }
+\newcommand{\ob}[1]{\text{ob($#1$)}}
+\newcommand{\two}{\mathbf{2}}
+\newcommand{\cee}{\mathcal{C}}
+\newcommand{\lan}[1]{\text{Lan}_{#1}}
+\newcommand{\ran}[1]{\text{Ran}_{#1}}
+\newcommand{\sset}{\widehat{\Delta}}
+\newcommand{\dist}[3]{\xymatrix@1{
+  #1:#2\ar[r]|-@{|} & #3 }}
+\newcommand{\xdist}[3]{\xymatrix@1{
+  #2\ar[r]|-@{|}^{#1} & #3 }}
+% \newcommand{\pullbackcorner}[1][ul]{\save*!/#1+1.8pc/#1:(1.5,-1.5)@^{|-}\restore}
+% \newcommand{\pushoutcorner}[1][ul]{\save*!/#1-1.8pc/#1:(-1.5,1.5)@^{|-}\restore}
+\newcommand{\eucal}[1]{\EuScript{#1}}
+
+
+\renewcommand{\bf}[1]{\mathbf{#1}}
+\newcommand{\cal}[1]{\mathcal{#1}}
+\renewcommand{\contentsname}{Contents}
+
+
+% % MATHTOOLS
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+% XY-PIC
+\newdir{ (}{
+  !/4pt/@{ }*:(1,-.2)@^{(}
+}
+
+\newdir{ >}{
+  !/9pt/@{ }*:(1,-.2)@^{>}*:(1,+.2)@_{>}
+}
+
+\newdir{|>}{%
+  !/4.5pt/@{|}*:(1,-.2)@^{>}*:(1,+.2)@_{>}
+}
+
+
+
+
+% Local Variables:
+% TeX-master: "../notes.tex"
+% End: 
+
