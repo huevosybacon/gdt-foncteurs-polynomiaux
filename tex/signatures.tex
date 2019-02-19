@@ -19,8 +19,18 @@ Then the term algebra
 \subsection{Free algebras of endofunctors}
 Let $\cC$ be a category and let $F\in [\cC,\cC]$ be an endofunctor on $\cC$.
 Then an \emph{$F$-algebra} is defined to be a morphism $FX\to X$ in $\cC$, and
-the category $F\alg$ of $F$-algebras is defined to be the full subcategory of
-$\cC\arr$ on the $F$-algebras. The codomain functor will be denoted
+the category $F\alg$ of $F$-algebras is defined to be the (non-full!) subcategory of
+$\cC\arr$ whose objects are the $F$-algebras, and whose morphisms are commuting
+squares
+\[
+    \xymatrix{
+      FX \ar[d]\ar[r]^{Ff}
+      &FY\ar[d]\\
+      X\ar[r]^f
+      &Y.
+    }
+\]
+The codomain functor will be denoted
 $U_F:F\alg\to\cC$.
 
 \begin{theorem} \label{thm:free-monad}
@@ -187,7 +197,8 @@ $\PolyMnd_I\to\PolyEnd_I$, living above $\Mnd(\Set/I)\to[\Set/I,\Set/I]$.
 \subsection{Term algebras}
 
 
+
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../../notes"
+%%% TeX-master: "../notes"
 %%% End:
