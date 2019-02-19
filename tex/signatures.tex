@@ -9,13 +9,6 @@
 For $I\in\Set$, the category $\PolyEnd_I$ of polynomial endofunctors on $Set/I$
 is defined to be the category $\PolyFun_{I,I}$.
 
-\subsection{Term algebra of a polynomial endofunctor}
-Let $P\in\PolyEnd_I$ be a polynomial functor written as
-\[
-    I\xot{s} E\xto{p} B\xto{t} I.
-\]
-Then the term algebra
-
 \subsection{Free algebras of endofunctors}
 Let $\cC$ be a category and let $F\in [\cC,\cC]$ be an endofunctor on $\cC$.
 Then an \emph{$F$-algebra} is defined to be a morphism $FX\to X$ in $\cC$, and
@@ -70,6 +63,8 @@ where $b\in B$ is an operation of $P$ and each $f_e$ is an operation of $P^k$
 with output type $s(e)$. Thus, for $n\geq 0$, operations of $P^n$ are finite
 trees of operations of $P$ whose leaves are all at height $n+1$.
 
+We will abuse notation and write $T\in P^n$ for $T$ an operation of $P^n$.
+
 Note that the sets of operations of the signatures $\underline{P^n}$ have in
 general a non-trivial intersection, as seen by the following exercise (which has
 a simple proof by induction on $n$.)
@@ -99,7 +94,7 @@ signature.
 Now, we can define $P^{\moo}$ to be the filtered union (the directed colimit)
 \[
     P^\moo := \bigcup_{n\in\NN} \{ T\in P^n \ssep T \text{ has no leaves} \} =
-    \bigcap_{n\in\NN} \{ T\in P^n \}.
+    \bigcup_{n\in\NN} \{ T\in P^n \} \cap \{ T \in P^{n+1} \}.
 \]
 $P^\moo$ is canonically an element of $\Set/I$, with the function
 $P^\moo\xto{t}I$ sending a tree to its output type. Clearly, $P^\moo$ is
