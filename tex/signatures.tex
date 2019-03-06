@@ -9,158 +9,195 @@
 For $I\in\Set$, the category $\PolyEnd_I$ of polynomial endofunctors on $Set/I$
 is defined to be the category $\PolyFun_{I,I}$.
 
+The category $\PolyEnd$ is defined to be the category whose objects are the $P \in
+\PolyEnd_I$ (for all $I \in \Set$) and whose morphisms are morphisms of polynomial
+functors of the form below.
+\begin{displaymath}
+  \begin{tikzcd}
+    I_P \arrow[d,"f_0"']
+    &E_P % \pullbackcorner
+    \arrow[l] \arrow[r] \arrow[d,"f_2"']
+    &B_P \ar[r] \ar[d,"f_1"']
+    &I_P \ar[d,"f_0"]
+    \\
+    I_Q
+    &E_Q \ar[l] \ar[r]
+    &B_Q \ar[r]
+    &I_Q
+  \end{tikzcd}
+\end{displaymath}
+(Note that a morphism of polynomial \emph{endo}functors is more than just a
+morphism of polynomial functors, since the rightmost and leftmost vertical
+morphisms are the same.) For any $I \in \Set$, $\PolyEnd_I$ is thus a full
+subcategory of $\PolyEnd$.
+
 \subsection{Free algebras of endofunctors}
+\begin{notation}
+  For categories $\cC, \cD$, we denote the category of functors by $\fun \cC
+  xy pic vs tikz cd\cD$.
+\end{notation}
+
 Let $\cC$ be a category and let $F\in [\cC,\cC]$ be an endofunctor on $\cC$.
 Then an \emph{$F$-algebra} is defined to be a morphism $FX\to X$ in $\cC$, and
-the category $F\alg$ of $F$-algebras is defined to be the (non-full!) subcategory of
-$\cC\arr$ whose objects are the $F$-algebras, and whose morphisms are commuting
-squares
-\[
-    \xymatrix{
-      FX \ar[d]\ar[r]^{Ff}
-      &FY\ar[d]\\
-      X\ar[r]^f
-      &Y.
-    }
-\]
-The codomain functor will be denoted
-$U_F:F\alg\to\cC$.
+the category $F\alg$ of $F$-algebras is defined to be the (non-full!)
+subcategory of $\cC\arr$ whose objects are the $F$-algebras, and whose morphisms
+are commutative squares
+\begin{displaymath}
+  \begin{tikzcd}
+    FX \ar[d]\ar[r,"Ff"]
+    &FY\ar[d]
+    \\
+    X\ar[r,"f"]
+    &Y.
+  \end{tikzcd}
+\end{displaymath}
+The (forgetful) codomain functor will be denoted $U_F:F\alg\to\cC$.
 
-\begin{theorem} \label{thm:free-monad}
-    TFAE:
-    \begin{enumerate}
-    \item For every $F\in[\cC,\cC]$, the functor $U_F$ has a left adjoint (the
-        free-algebra functor).
-    \item The forgetful functor $\Mnd(\cC)\to[\cC,\cC]$ has a left adjoint (the
-        free-monad functor).
-    \end{enumerate}
+We denote the category of monads (and monad morphisms) on $\cC$ by $\Mnd(\cC)$.
+Note that this is just the category of monoids in the monoidal category $\fun
+\cC \cC$. There is an obvious forgetful functor $\Mnd(\cC) \to \fun \cC \cC$.
+
+\begin{theorem} \label{thm:free-monad} TFAE (The following are equivalent):
+  \begin{enumerate}
+  \item For every $F\in[\cC,\cC]$, the functor $U_F$ has a left adjoint (the
+    free-algebra functor).
+  \item The forgetful functor $\Mnd(\cC)\to[\cC,\cC]$ has a left adjoint (the
+    free-monad functor).
+  \end{enumerate}
 \end{theorem}
 
-The theorem essentially follows from the following fundamental observations.
+The theorem essentially follows from the following fundamental propositions.
 \begin{proposition}
     Let $F\in\fun \cC \cC$ be such that $U_F$ has a left adjoint $L_F$. Then the
     monad $U_FL_F$ is the free monad on the endofunctor $F$.
 \end{proposition}
 
 \begin{proposition}
-    Let $F\in\fun \cC \cC$ and let $\bar{F}$ be the free monad on $F$. Then
-    there is an equivalence of categories $F\alg\simeq\bar{F}\alg$, where
-    $\bar{F}\alg$ is the Eilenberg-Moore category of algebras of the monad
-    $\bar{F}$.
+  Let $F\in\fun \cC \cC$ and let $\bar{F}$ be the free monad on $F$. Then there
+  is an equivalence of categories $F\alg\simeq\bar{F}\alg$, where $\bar{F}\alg$
+  is the Eilenberg-Moore category of algebras of the monad $\bar{F}$.
 \end{proposition}
 \subsection{Free algebras of polynomial endofunctors}
 Let $P$ be a finitary (i.e. the fibres of $p$ are finite) polynomial
 endofunctor, as shown.
 \[
-    I\xot{s} E\xto{p} B\xto{t} I
+  I\xot{s} E\xto{p} B\xto{t} I
 \]
-Then the function symbols (operations) of the signature
-$\underline{P}=(B,I,I,p\inv,s,t)$ can be \emph{composed} in a meaningful way,
-since the set of output types is the same as the set of input types. Indeed, if
-we denote $P^n:=P\circ P\circ\ldots\circ P \ (n \text{ times})$, then it is
-clear that the operations of $P^{k+1}$ are trees of the form $b(f_e)_{e\in p\inv(b)}$,
-where $b\in B$ is an operation of $P$ and each $f_e$ is an operation of $P^k$
-with output type $s(e)$. Thus, for $n\geq 0$, operations of $P^n$ are finite
-trees of operations of $P$ whose leaves are all at height $n+1$.
+We denote $P^n:=P\circ P\circ\ldots\circ P \ (n \text{ times})$ for $n \geq 1$,
+and define $P^0$ to be the identity polynomial endofunctor $I\xot{id} I \xto{id}
+I \xto{id} I$.
 
-We will abuse notation and write $T\in P^n$ for $T$ an operation of $P^n$.
+Indeed, since $P^{k+1} = P \circ P^k$, the operations of $P^{k+1}$ are by
+definition trees of the form $b(f_e)_{e\in p\inv(b)}$, where $b\in B$ is an
+operation of $P$ and each $f_e$ is an operation of $P^k$ with output type
+$s(e)$. Thus, for $n\geq 0$, operations of $P^n$ are finite trees of operations
+of $P$ whose leaves are all at height $n+1$. We will abuse notation and write
+$T\in P^n$ for $T$ an operation of $P^n$.
 
-Note that the sets of operations of the signatures $\underline{P^n}$ have in
-general a non-trivial intersection, as seen by the following exercise (which has
-a simple proof by induction on $n$.)
-\begin{exercise} Show that
-        $\{ T\in P^n \} \cap \{ T\in P^{n+1} \} = \{ T\in P^n \ssep T \text{ has
-          no leaves} \}.$
+Note that the sets of operations of $P^n$ have in general a non-trivial
+intersection, as seen by the following exercise.
+\begin{exercise} Show that $\{ T\in P^n \} \cap \{ T\in P^{n+1} \} = \{ T\in P^n
+  \ssep T \text{ has no leaves} \}.$
 \end{exercise}
-
-This information is captured in the definition of the \emph{term algebra} on a
-signature.
-\begin{definition}
-    Let $S=(B,I,I,p\inv,s,t)$ be a signature. Then the \emph{term algebra} of
-    $S$ is the set $S^*$ of trees inductively defined by the grammar
-    \[
-        (i\in I,b\in B) t ::= x^i \ssep b(t_e)_{e\in p\inv b}
-    \]
-    where each $x^i$ is a \emph{variable of type $i\in I$}.
-
-    A \emph{closed term} is an element of $S^*$ that does not contain any variables.
-\end{definition}
-
-\begin{exercise}
-    Show that $(\underline{P})^*=\bigcup_{n\in\NN} \{ T\in P^n \}$.
-\end{exercise}
+\begin{proof}
+  $P^{n+1} = P^n \circ P$; thus the operations of $P^{n+1}$ are of the form
+  $T(b_e)_e$ where $T$ is an operation of $P^n$ and $(b_e)_e$ is a list of
+  operations of $P$ indexed by the leaves of $T$.
+\end{proof}
 
 
-Now, we can define $P^{\moo}$ to be the filtered union (the directed colimit)
+Now, we define $P^{\moo}$ to be the filtered union (the directed colimit)
 \[
-    P^\moo := \bigcup_{n\in\NN} \{ T\in P^n \ssep T \text{ has no leaves} \} =
-    \bigcup_{n\in\NN} \{ T\in P^n \} \cap \{ T \in P^{n+1} \}.
+  P^\moo := \bigcup_{n\in\NN} \{ T\in P^n \ssep T \text{ has no leaves} \} =
+  \bigcup_{n\in\NN} \{ T\in P^n \} \cap \{ T \in P^{n+1} \}.
 \]
-$P^\moo$ is canonically an element of $\Set/I$, with the function
-$P^\moo\xto{t}I$ sending a tree to its output type. Clearly, $P^\moo$ is
+The function $P^\moo \xto{t} I$ sending an operation to its output type
+canonically exhibits $P^\moo$ as an element of $\Set/I$. Clearly, $P^\moo$ is
 non-empty if and only if $P$ has operations of arity $0$.
 
-\begin{exercise}
-    Show that $P^\moo$ is precisely the set of closed terms in $(\underline{P})^*$.
-\end{exercise}
+
 
 For $A\xto{f} I \in \Set/I$, we define $P_A$ to be the polynomial endofunctor
 \[
-    I\xot{s} E\xto{p+\emptyset} B+A \xto{(t,f)} I.
+  I\xot{s} E\xto{p+\emptyset} B+A \xto{(t,f)} I.
 \]
-It is easy to see that the signature $\underline{P_A}$ is obtained by adding an
-operation of arity $0$ to the signature $\underline{P}$ for each element of $A$,
-with output type given by $f$.
 
-\begin{exercise}
-    For $A\xto{f} I$, let $A$ denote the polynomial endofunctor
-    $I\ot\emptyset\to A\xto{f} I$. Show that $P_A$ is the coproduct $P+A$ in
-    $\PolyEnd_I$.
-\end{exercise}
 
-\begin{lemma} \label{lemma:free-algebra}
-    For all $A\xto{f}I$, $P_A^\moo\xto{t}I$ is the free $P$-algebra on
-    $A\xto{f}I$.
+\begin{remark}
+  For $A\xto{f} I$, let $A$ denote the polynomial endofunctor $I\ot\emptyset\to
+  A\xto{f} I$. Then $P_A$ is the coproduct $P+A$ in $\PolyEnd_I$.
+\end{remark}
+
+\begin{lemma} \label{lemma:free-algebra} For all $A\xto{f}I$, $P_A^\moo\xto{t}I$
+  is the free $P$-algebra on $A\xto{f}I$.
 \end{lemma}
 \begin{proof}
-    An element of $P(P_A^\moo)$ is a formal composite $b(x_i)_{i\in p\inv b}$ of
-    an operation $b$ of $P$ along with an element $x_i\in P_A^\moo$ for each
-    input of $b$. But this is clearly once again an element of $P_A^\moo$, i.e.
-    a leafless tree of operations of $P_A$. Thus we have a canonical function
-    $P(P_A^\moo)\xto{\alpha_A} P_A^\moo$ exhibiting $P_A^\moo$ as a $P$-algebra.
-    It is easy to see that $\alpha_A$ is an inclusion, whose complement is just
-    the subset $A\subset P_A^\moo$.
+  An element of $P(P_A^\moo)$ is by definition a formal composite $b(x_i)_{i\in
+    p\inv b}$ of an operation $b$ of $P$ along with an element $x_i\in P_A^\moo$
+  for each input of $b$. But this is clearly once again an element of
+  $P_A^\moo$, i.e. a leafless tree of operations of $P_A$. Thus we have a
+  canonical function $P(P_A^\moo)\xto{\alpha_A} P_A^\moo$ in $\Set/I$,
+  exhibiting $P_A^\moo$ as a $P$-algebra. It is easy to see that $\alpha_A$ is
+  an inclusion, whose complement is just the subset $A\subset P_A^\moo$.
 
-    Now if $P(X)\xto{\alpha} X$ is any $P$-algebra, then a function $g:A\to X$
-    gives rise to an algebra morphism $\bar{g}:P_A^\moo\to X$ defined
-    inductively as
-    \begin{align*}
-      \bar{g} :  \quad a &\mapsto g(a),\quad a\in A \\
-      b(x_i) &\mapsto \alpha(b(\bar{g}(x_i)))
-    \end{align*}
-    and it is easy to see that for every morphism $h\in P\alg(P_A^\moo,X)$,
-    $h=\overline{h\restr A}$. The function $(\bar{\ }):Set/I(A,X)\to
-    P\alg(P_A^\moo,X)$ is thus injective and surjective.
+  Now if $P(X)\xto{\alpha} X$ is any $P$-algebra, then a function $g:A\to X$ in
+  $\Set/I$ gives rise to an algebra morphism $\bar{g}:P_A^\moo\to X$ defined
+  inductively as
+  \begin{align*}
+    \bar{g} :  \quad a &\mapsto g(a),\quad a\in A \\
+    b(x_i) &\mapsto \alpha_A(b(\bar{g}(x_i)))
+  \end{align*}
+  and it is easy to see that restriction to $A \subset P_A^\moo$ defines an
+  inverse to the function $(\bar{\ }):Set/I(A,X)\to P\alg(P_A^\moo,X)$.
 \end{proof}
 
 \begin{corollary}
-    $P^\moo$ is the initial object of $P\alg$.
+  $P^\moo$ is the initial object of $P\alg$.
 \end{corollary}
 \begin{proof}
-    Clearly, $P^\moo=P_\emptyset^\moo$, which is the free algebra on
-    $\emptyset\to I$. The free-algebra functor is a left adjoint, and we
-    conclude using the previous lemma, since $\emptyset\to I$ is initial in
-    $\Set/I$.
+  Clearly, $P^\moo=P_\emptyset^\moo$, which is the free algebra on $\emptyset\to
+  I$ by the previous lemma. The free-algebra functor is a left adjoint, and we
+  conclude since $\emptyset\to I$ is initial in $\Set/I$.
 \end{proof}
 
 
 For a more conceptual explanation, note that lemma \ref{lemma:free-algebra} is
 equivalent to the following exercise.
 \begin{exercise}
-    For $P\in\PolyEnd_I$ and $A\xto{f} I$, we have the equivalence of categories
-    $P_A\alg\simeq P_A^\moo/P\alg$, where $P_A^\moo/P\alg$ denotes the coslice
-    category under $P_A^\moo$.
+  For $P\in\PolyEnd_I$ and $A\xto{f} I$, we have the equivalence of categories
+  $P_A\alg\simeq P_A^\moo/P\alg$, where $P_A^\moo/P\alg$ denotes the coslice
+  category under $P_A^\moo$.
 \end{exercise}
+
+
+Remark that the function symbols (operations) of the signature $\underline{P} =
+(B,I,I,p\inv,s,t)$ can be \emph{composed} in a meaningful way, since the set of
+output types is the same as the set of input types. This information is captured
+in the definition of the \emph{term algebra} on a signature.
+\begin{definition}
+  Let $S=(B,I,I,p\inv,s,t)$ be a signature. Then the \emph{typed term algebra}
+  of $S$ is the set $S^*$ of trees inductively defined by the grammar
+  \[
+    (i\in I,b\in B)\quad u^i ::= x^i \ssep (b(u_e^{s(e)})_{e\in p\inv b})^{t(b)}
+  \]
+  where each $x^i$ is a variable of type $i\in I$.
+
+  A \emph{closed term} is an element of $S^*$ that does not contain any
+  variables.
+\end{definition}
+
+\begin{remark}
+  We immediately note the canonical bijection $(\underline{P})^* \cong
+  \bigcup_{n\in\NN} \{ T\in P^n \}$ of sets.
+\end{remark}
+
+\begin{remark}
+  $P^\moo$ is precisely the set of closed terms in $(\underline{P})^*$.
+\end{remark}
+
+For $A \xto{f} I$, it is easy to see that the signature $\underline{P_A}$ is
+obtained by adding an operation of arity $0$ to the signature $\underline{P}$
+for each element of $A$, with output type given by $f$.
 
 \subsection{The ``free-polynomial-monad'' monad}
 Let the category of \emph{polynomial monads} $\PolyMnd_I$ be the category of
@@ -168,14 +205,21 @@ monoids in the monoidal category $\PolyEnd_I$. Its objects are therefore monads
 on $\Set/I$ whose endofunctor is polynomial, and whose unit and multiplication
 are cartesian natural transformations, and we have the obvious square of
 forgetful functors
-\[
-    \xymatrix{
-      \PolyEnd_I\ar[d]
-      &\PolyMnd_I\ar[l]\ar[d]\\
-      [\Set/I,\Set/I]
-      &\Mnd(Set/I).\ar[l]
-    }
-\]
+
+\begin{displaymath}
+  \begin{tikzcd}
+    \PolyEnd_I \ar[d]
+    &\PolyMnd_I \ar[l]\ar[d]\\
+    \fun {\Set/I}{\Set/I}
+    &\Mnd(Set/I). \ar[l]
+  \end{tikzcd}
+\end{displaymath}
+
+% \[
+%   \xymatrix{ \PolyEnd_I\ar[d]
+%     &\PolyMnd_I\ar[l]\ar[d]\\
+%     [\Set/I,\Set/I] &\Mnd(Set/I).\ar[l] }
+% \]
 
 Theorem \ref{thm:free-monad} now tells us that the endofunctor
 $P^*:A\mapsto P_{(A)}^\moo$ is the free monad on the polynomial endofunctor $P$.
